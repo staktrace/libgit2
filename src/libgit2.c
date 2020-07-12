@@ -62,6 +62,9 @@ static int git_libgit2_settings_global_init(void)
 int git_libgit2_init(void)
 {
 	static git_runtime_init_fn init_fns[] = {
+#ifdef GIT_WIN32
+		git_win32_leakcheck_global_init,
+#endif
 		git_allocator_global_init,
 		git_tlsdata_global_init,
 		git_threads_global_init,
